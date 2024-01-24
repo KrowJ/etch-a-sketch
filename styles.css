@@ -54,6 +54,6 @@ body {
 }
 
 .toggled {
-    background-color: red; /* Style for the toggled state */
+    background-color: rgb(65, 155, 100);
   }
 
