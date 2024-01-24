@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 600px;
+    width: 830px;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    background-color: white;
+  }
+
+  .flex-item {
+    box-sizing: border-box;
+    border: 1px solid black;
+  }
+
+#selection-container {
+    border-radius: 15px;
+    height: 600px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    background-color: rgb(38, 45, 65);
+}
+
+#erase-btn, #reset-btn {
+    padding: 10px 40px;
+    border-radius: 15px;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#erase-btn:hover, #reset-btn:hover {
+    background-color: rgb(82, 82, 82);
+    color: white;
+    border: 1px solid white;
+}
+
+.toggled {
+    background-color: red; /* Style for the toggled state */
+  }
+
