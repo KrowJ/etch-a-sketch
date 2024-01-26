@@ -56,13 +56,15 @@ function addButtons() {
 const eraseBtn = document.querySelector("#erase-btn");
 const resetBtn = document.querySelector("#reset-btn");
 const setColor = document.querySelector(".color-picker");
-const toggleGrd = document.querySelector('#set-toggle-grid');
+const offGrd = document.querySelector('#set-off-grid');
+const onGrd = document.querySelector('#set-on-grid');
 const grids = document.querySelectorAll(".flex-item");
 const paintBtn = document.querySelector("#paint-btn")
   
 resetBtn.addEventListener("click", resetButton);
 eraseBtn.addEventListener("click", eraseButton);
-toggleGrd.addEventListener('click', toggleGrids);
+offGrd.addEventListener('click', offGrids);
+onGrd.addEventListener('click', onGrids);
 setColor.addEventListener("input", colorPicker);
 paintBtn.addEventListener("click", paintButton);
 
@@ -98,10 +100,17 @@ function paintButton() {
   colorPicker()
 }
 
-function toggleGrids() {
+function offGrids() {
   for (i = 0; i < grids.length; i++) {
     const item = grids[i];
       item.style.border = "none";
+    }
+}
+
+function onGrids() {
+  for (i = 0; i < grids.length; i++) {
+    const item = grids[i];
+      item.style.border = "1px solid black";
     }
 }
 

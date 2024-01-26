@@ -22,7 +22,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 600px;
+  height: 500px;
   width: 800px;
   margin: 0 auto;
 }
@@ -126,7 +126,8 @@ input#set-grid-size {
   transition: 0.1s linear;
 }
 
-input#set-toggle-grid {
+input#set-off-grid,
+input#set-on-grid {
     border-radius: 15px;
     border: none;
     font-size: 16px;
@@ -136,7 +137,8 @@ input#set-toggle-grid {
     cursor: pointer;
 }
 
-input#set-toggle-grid:hover {
+input#set-off-grid:hover,
+input#set-on-grid:hover {
   transform: scale(1.07);
   transition: 0.1s linear;
 }
