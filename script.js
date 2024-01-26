@@ -1,5 +1,8 @@
 let MouseDown = false;
 
+const containerSize = 500;
+let gridSize =  16;
+
 document.addEventListener("mousedown", () => {
   MouseDown = true;
 });
@@ -8,12 +11,14 @@ document.addEventListener("mouseup", () => {
   MouseDown = false;
 });
 
+
 function container() {
   const container = document.getElementById("grid-container");
-  const containerSize = 600;
-  const gridSize = 16;
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
 
-  const itemSize = containerSize / gridSize;
+  let itemSize = containerSize / gridSize;
 
   container.style.width = containerSize + "px";
   container.style.height = containerSize + "px";
@@ -25,67 +30,103 @@ function container() {
     gridItem.style.height = itemSize + "px";
     container.appendChild(gridItem);
 
-    gridItem.addEventListener("mousemove", () => {
-      if (MouseDown) {
-        gridItem.style.backgroundColor = "black";
-      }
-    });
-
     gridItem.addEventListener("mousedown", () => {
       if (!MouseDown) {
         gridItem.style.backgroundColor = "black";
       }
     });
+    gridItem.addEventListener("mousemove", () => {
+      if (MouseDown) {
+        gridItem.style.backgroundColor = "black";
+      }
+    });
   }
+  addButtons()
+} container()
+
+const setGrid = document.querySelector('#set-grid-size');
+setGrid.addEventListener("input", updateGridSize);
+
+function updateGridSize() {
+  gridSize = parseInt(setGrid.value);
+  container();
 }
 
-container();
-
+function addButtons() {
 const eraseBtn = document.querySelector("#erase-btn");
 const resetBtn = document.querySelector("#reset-btn");
-const grids = document.querySelector(".flex-item");
-
+const setColor = document.querySelector(".color-picker");
+const toggleGrd = document.querySelector('#set-toggle-grid');
+const grids = document.querySelectorAll(".flex-item");
+const paintBtn = document.querySelector("#paint-btn")
+  
 resetBtn.addEventListener("click", resetButton);
+eraseBtn.addEventListener("click", eraseButton);
+toggleGrd.addEventListener('click', toggleGrids);
+setColor.addEventListener("input", colorPicker);
+paintBtn.addEventListener("click", paintButton);
 
 function resetButton() {
-  const grids = document.querySelectorAll(".flex-item");
-  grids.forEach((item) => {
+  for (i = 0; i < grids.length; i++) {
+  const item = grids[i];
     item.style.backgroundColor = "white";
-  });
+  }
 }
 
-eraseBtn.addEventListener("click", eraseButton);
-
 function eraseButton() {
-  const grids = document.querySelectorAll(".flex-item");
-  eraseBtn.classList.toggle("toggled");
-  if (eraseBtn.classList.contains("toggled")) {
-    grids.forEach((item) => {
-      item.addEventListener("mousedown", () => {
-        if (!MouseDown) {
-          item.style.backgroundColor = "white";
-        }
-      });
-      item.addEventListener("mousemove", () => {
-        if (MouseDown) {
-          item.style.backgroundColor = "white";
-        }
-      });
-    });
-    console.log("Button is toggled");
-  } else {
-    grids.forEach((item) => {
-      item.addEventListener("mousedown", () => {
-        if (!MouseDown) {
-          item.style.backgroundColor = "black";
-        }
-      });
-      item.addEventListener("mousemove", () => {
-        if (MouseDown) {
-          item.style.backgroundColor = "black";
-        }
-      });
-    });
-    console.log("Button is not toggled");
+  for (let i = 0; i < grids.length; i++) {
+    const item = grids[i];
+
+    item.addEventListener("mousedown", eraseMouseDownHandler);
+    item.addEventListener("mousemove", eraseMouseMoveHandler);
   }
+
+  function eraseMouseDownHandler() {
+    if (!MouseDown) {
+      this.style.backgroundColor = "white";
+    }
+  }
+
+  function eraseMouseMoveHandler() {
+    if (MouseDown) {
+      this.style.backgroundColor = "white";
+    }
+  }
+}
+
+function paintButton() {
+  colorPicker()
+}
+
+function toggleGrids() {
+  for (i = 0; i < grids.length; i++) {
+    const item = grids[i];
+      item.style.border = "none";
+    }
+}
+
+function colorPicker() {
+  const setColor = document.querySelector(".color-picker");
+  const coloredElement = document.querySelectorAll(".flex-item");
+  let selectedColor = setColor.value;
+
+  for (let i = 0; i < coloredElement.length; i++) {
+    const item = coloredElement[i];
+
+    item.addEventListener("mousedown", eraseMouseDownHandler);
+    item.addEventListener("mousemove", eraseMouseMoveHandler);
+  }
+
+  function eraseMouseDownHandler() {
+    if (!MouseDown) {
+      this.style.backgroundColor = selectedColor;
+    }
+  }
+
+  function eraseMouseMoveHandler() {
+    if (MouseDown) {
+      this.style.backgroundColor = selectedColor;
+    }
+  }
+}
 }

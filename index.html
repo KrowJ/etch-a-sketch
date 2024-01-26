@@ -1,19 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch a Sketch</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
+    <header id="title-container">
+      <h1 id="title">Etch-a-sketch</h1>
+    </header>
     <div id="container">
-        <div id="selection-container">
-            <button  id="erase-btn">Erase</button>
-            <button  id="reset-btn">Reset</button>
+      <div id="selection-container">
+        <button id="erase-btn">Erase</button>
+        <button id="paint-btn">Paint</button>
+        <button id="reset-btn">Reset</button>
+        <div id="ui-buttons">
+          <form id="color-changer">
+            <span>Set Color</span>
+            <input id="set-color" class="color-picker" type="color" name="set-color" />
+          </form>
         </div>
-        <div class="flex-container" id="grid-container"></div>
+        <div id="ui-buttons">
+          <form id="grid-size-changer">
+            <span>Set Grid Size</span>
+            <input
+              id="set-grid-size"
+              type="range"
+              name="set-grid-size"
+              min="1"
+              max="64"
+              value="16"
+              oninput="this.nextElementSibling.value = this.value"
+            />
+            <output>16</output>
+          </form>
+        </div>
+        <div id="ui-buttons">
+            <form id="toggle-grid">
+                <span>Toggle Grid</span>
+                <input id="set-toggle-grid" type="button" name="set-toggle-grid" value="Grid">
+            </form>
+          </div>
+      </div>
+      <div class="flex-container" id="grid-container"></div>
     </div>
-</body>
+  </body>
 </html>
